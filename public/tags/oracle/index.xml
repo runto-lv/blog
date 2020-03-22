@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>oracle on Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/tags/oracle.html</link>
+    <description>Recent content in oracle on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.runto.lv/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DataGuard standby数据库的日常维护</title>
+      <link>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</guid>
+      <description>参考网址： https://www.cnblogs.com/wlmq/articles/6069477.html 1.停止Standby # 查看备库是否在应用日志进行恢复 select process, status from v$managed_standby; alter database recover managed standby database cancel; shutdown immediate; 2.切换到只读模式 2.1由shutdown模式</description>
+    </item>
+    
+  </channel>
+</rss>

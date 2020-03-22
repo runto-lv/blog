@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/tags.html</link>
+    <description>Recent content in Tags on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.runto.lv/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>database</title>
+      <link>https://blog.runto.lv/tags/database.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/database.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>oracle</title>
+      <link>https://blog.runto.lv/tags/oracle.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/oracle.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>test</title>
+      <link>https://blog.runto.lv/tags/test.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/test.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keepalived</title>
+      <link>https://blog.runto.lv/tags/keepalived.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/keepalived.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>linux</title>
+      <link>https://blog.runto.lv/tags/linux.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/linux.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://blog.runto.lv/tags/mysql.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/mysql.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>高可用</title>
+      <link>https://blog.runto.lv/tags/%E9%AB%98%E5%8F%AF%E7%94%A8.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/%E9%AB%98%E5%8F%AF%E7%94%A8.html</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

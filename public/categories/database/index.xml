@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Database on Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/categories/database.html</link>
+    <description>Recent content in Database on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.runto.lv/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>DataGuard standby数据库的日常维护</title>
+      <link>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</guid>
+      <description>参考网址： https://www.cnblogs.com/wlmq/articles/6069477.html 1.停止Standby # 查看备库是否在应用日志进行恢复 select process, status from v$managed_standby; alter database recover managed standby database cancel; shutdown immediate; 2.切换到只读模式 2.1由shutdown模式</description>
+    </item>
+    
+    <item>
+      <title>mysql双主模式两台Server配置文件</title>
+      <link>https://blog.runto.lv/post/database/mysql_conf.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/database/mysql_conf.html</guid>
+      <description>mysql master [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock # Disabling symbolic-links is recommended to prevent assorted security risks symbolic-links=0 # Settings user and group are ignored when systemd is used. # If you need to run mysqld under a different user or group, # customize your systemd unit file for mariadb according to the # instructions in http://fedoraproject.org/wiki/Systemd server-id=2 relay_log = mysql-relay-bin log_bin =mysql-bin log_slave_updates =1 auto_increment_increment=2 auto_increment_offset=2 character-set-server=utf8 lower_case_table_names=1 [mysqld_safe] log-error=/var/log/mariadb/mariadb.log pid-file=/var/run/mariadb/mariadb.pid</description>
+    </item>
+    
+  </channel>
+</rss>

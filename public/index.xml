@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/</link>
+    <description>Recent content on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://blog.runto.lv/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>关于</title>
+      <link>https://blog.runto.lv/about.html</link>
+      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      
+      <guid>https://blog.runto.lv/about.html</guid>
+      
+        <description>&lt;p&gt;Hugo is a static site engine written in Go.&lt;/p&gt;
+
+&lt;p&gt;It makes use of a variety of open source projects including:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34;&gt;Cobra&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;Viper&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/jWalterWeatherman&#34;&gt;J Walter Weatherman&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cast&#34;&gt;Cast&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>DataGuard standby数据库的日常维护</title>
+      <link>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</guid>
+      
+        <description>
+
+&lt;p&gt;参考网址：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://www.cnblogs.com/wlmq/articles/6069477.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;1-停止standby&#34;&gt;1.停止Standby&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# 查看备库是否在应用日志进行恢复
+select process, status from v$managed_standby;
+
+alter database recover managed standby database cancel;
+shutdown immediate;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-切换到只读模式&#34;&gt;2.切换到只读模式&lt;/h3&gt;
+
+&lt;h4 id=&#34;2-1由shutdown模式切换到只读模式&#34;&gt;2.1由shutdown模式切换到只读模式&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;startup nomount;
+alter database mount standby database;
+alter database open read only;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;2-2由应用日志模式切换到只读模式&#34;&gt;2.2由应用日志模式切换到只读模式&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database recover managed standby database cancel; -- 取消日志应用
+alter database open read only;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-切换回管理恢复模式&#34;&gt;3.切换回管理恢复模式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;startup nomount;
+alter database mount standby database;
+alter database open read only;
+alter database recover managed standby database disconnect from session;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&amp;ndash; 启动日志应用&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database recover managed standby database using current logfile disconnect from session;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-主库和备库之间角色切换&#34;&gt;4.主库和备库之间角色切换&lt;/h3&gt;
+
+&lt;p&gt;可以先使用下面这个命令查询一下各位的状态&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;select database_role,switchover_status from v$database;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;4-1-主库切换为备库&#34;&gt;4.1 主库切换为备库&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database commit to switchover to physical standby;
+
+# 主库有会话连接的时候,使用下面的，如果没有，可以使用上面的
+alter database commit to switchover to physical standby with session shutdown;
+
+shutdown immediate;
+startup nomount;
+alter database mount standby database;
+alter database recover managed standby database disconnect from session;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&#34;4-2-从库切换为主库&#34;&gt;4.2 从库切换为主库&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database commit to switchover to primary;
+shutdown immediate;
+startup
+alter system switch logfile;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-备库自动使用主库传过来的日志进行恢复&#34;&gt;5.备库自动使用主库传过来的日志进行恢复&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database recover automatic standby database;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;6-更改保护模式&#34;&gt;6.更改保护模式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database set standby database to maximize protection;
+alter database set standby database to maximize availability;
+alter database set standby database to maximize performancen;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;7-取消自动恢复模式&#34;&gt;7.取消自动恢复模式&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database recover managed standby database cancel;
+alter database recover managed standby database finish;
+alter database recover managed standby database finish force;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;8-查询同步状况&#34;&gt;8.查询同步状况&lt;/h3&gt;
+
+&lt;p&gt;其中如果apply lag对应的value大于0，那么就需要注意检查是否同步正常。如果相差时间非常多，value值等于几分钟，甚至达到1个小时，那可能实时同步有问题，需要检查 alert log 文件&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;select to_char(SYSDATE,&#39;yyyymmdd hh24:mi:ss&#39;) CTIME,NAME,VALUE,DATUM_TIME from V$DATAGUARD_STATS  WHERE NAME LIKE &#39;%lag&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>测试一下</title>
+      <link>https://blog.runto.lv/post/other/first.html</link>
+      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/other/first.html</guid>
+      
+        <description>
+
+&lt;h1 id=&#34;这是一个测试站点&#34;&gt;这是一个测试站点&lt;/h1&gt;
+
+&lt;p&gt;安装完成后，hugo是没有默认的主题的，可以去主题官网上下载主题： 直接clone主题到云服务器上的themes下&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Keepalived用法</title>
+      <link>https://blog.runto.lv/post/linux/keepalived.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/linux/keepalived.html</guid>
+      
+        <description>
+
+&lt;h2 id=&#34;测试一下图片&#34;&gt;测试一下图片&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;../img/screenshot.png&#34; alt=&#34;1583138735899&#34; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&#34;抽象流程&#34;&gt;抽象流程&lt;/h4&gt;
+
+&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/arch5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Rainbond的流程建立在&lt;code&gt;以应用为中心&lt;/code&gt;抽象基础上，以交付为目的&lt;/p&gt;
+
+&lt;h4 id=&#34;场景流程&#34;&gt;场景流程&lt;/h4&gt;
+
+&lt;h5 id=&#34;互联网公司交付流程&#34;&gt;互联网公司交付流程&lt;/h5&gt;
+
+&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;企业软件公司交付流程&#34;&gt;企业软件公司交付流程&lt;/h5&gt;
+
+&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;行业云交付流程&#34;&gt;行业云交付流程&lt;/h5&gt;
+
+&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h5 id=&#34;大型企事业单位it流程&#34;&gt;大型企事业单位IT流程&lt;/h5&gt;
+
+&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>mysql双主模式两台Server配置文件</title>
+      <link>https://blog.runto.lv/post/database/mysql_conf.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/database/mysql_conf.html</guid>
+      
+        <description>&lt;p&gt;mysql master&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+server-id=2
+relay_log = mysql-relay-bin
+log_bin =mysql-bin
+log_slave_updates =1
+auto_increment_increment=2
+auto_increment_offset=2
+character-set-server=utf8
+lower_case_table_names=1
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;mysql slave&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# Settings user and group are ignored when systemd is used.
+# If you need to run mysqld under a different user or group,
+# customize your systemd unit file for mariadb according to the
+# instructions in http://fedoraproject.org/wiki/Systemd
+server-id = 1
+log-bin = binlog
+relay_log = mysql-relay-bin
+log_slave_updates =1
+auto_increment_increment=2
+auto_increment_offset=1
+character-set-server=utf8
+lower_case_table_names=1
+
+[mysqld_safe]
+log-error=/var/log/mariadb/mariadb.log
+pid-file=/var/run/mariadb/mariadb.pid
+
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+  </channel>
+</rss>
