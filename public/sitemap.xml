@@ -169,4 +169,165 @@
     <priority>0.5</priority>
   </url>
   
+  <url>
+    <loc>https://blog.runto.lv/tags/aliyun.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/categories/aliyun.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/ddns.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/hyper-v.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/kubernetes.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/categories/kubernetes.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/minikube.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/python.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/aliyun/aliyun_ddns_api.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/windows.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/%E9%98%BF%E9%87%8C%E4%BA%91.html</loc>
+    <lastmod>2019-10-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/docker.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/gitlab.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/nas.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/synology.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/categories/synology.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</loc>
+    <lastmod>2019-05-04T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/ldap.html</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/openvpn.html</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/categories/openvpn.html</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/otp.html</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/openvpn/openvpn_ldap_otp.html</loc>
+    <lastmod>2019-05-01T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
 </urlset>

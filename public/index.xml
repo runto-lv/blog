@@ -472,5 +472,212 @@ pid-file=/var/run/mariadb/mariadb.pid
       
     </item>
     
+    <item>
+      <title>Hyper-v下安装minikube</title>
+      <link>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
+      
+        <description>
+
+&lt;blockquote&gt;
+&lt;p&gt;本文参考网址：&lt;a href=&#34;https://yq.aliyun.com/articles/221687&#34;&gt;https://yq.aliyun.com/articles/221687&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;1-打开powershell安装hyper-v的所有组件&#34;&gt;1. 打开powershell安装hyper-v的所有组件&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-打开hyper-v管理控制台-新建一个外部的网络-映射到一个物理网卡-虚拟交换机的名称-这里使用-bridge&#34;&gt;2.打开hyper-v管理控制台，新建一个外部的网络，映射到一个物理网卡，虚拟交换机的名称，这里使用&lt;code&gt;Bridge&lt;/code&gt;&lt;/h3&gt;
+
+&lt;h3 id=&#34;3-下载-minikube-windows-amd64-exe-文件-并重命名为-minikube-exe&#34;&gt;3.下载 minikube-windows-amd64.exe 文件，并重命名为 &lt;code&gt;minikube.exe&lt;/code&gt;&lt;/h3&gt;
+
+&lt;p&gt;下载地址&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://github.com/kubernetes/minikube/releases
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-执行创建hyper-v&#34;&gt;4.执行创建hyper-v&lt;/h3&gt;
+
+&lt;p&gt;以管理员身份打开powershell过后执行下面的命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; minikube.exe start --image-mirror-country cn --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.6.0.iso    --registry-mirror=https://ho0aa4tw.mirror.aliyuncs.com     --vm-driver=&amp;quot;hyperv&amp;quot;    --hyperv-virtual-switch=&amp;quot;Bridge&amp;quot;     --memory=4096 --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;上面这个minikube的最新版本是我写这个文档 时的最新版本，如果要更新的，需要去下载&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;上面这个文档里面，是创建一个虚拟机，使用上面的镜像的信息安装一台k8s&lt;/p&gt;
+
+&lt;p&gt;安装的过程可能会有文件下载不下来的情况，需要重新下载，已经下载完成的不要删除，再次下载的时候，已经下载的不会再下载，但虚拟机要删除历史文件，删除此文件夹&lt;code&gt;C:\Users\runto.lv\.minikube&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;下载文件的保存路径在下面&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Users\runto.lv\.minikube\cache\images\registry.cn-hangzhou.aliyuncs.com\google_containers
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下载kubuctl&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/windows/amd64/kubectl.exe
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置环境变量，不然minicube dashboard这个命令不能运行,过程省略&lt;/p&gt;
+
+&lt;h3 id=&#34;5-本机文件复制复制到虚拟机&#34;&gt;5.本机文件复制复制到虚拟机&lt;/h3&gt;
+
+&lt;p&gt;先在hyper-v里面这台虚拟机的网卡上面，开启来宾服务，然后就可以把文件复制到虚拟机里面&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Copy-VMFile -Name minikube -SourcePath &#39;C:\Users\runto.lv\.minikube\cache\v1.17.2\kubeadm&#39; -DestinationPath &#39;/bin&#39; -FileSource Host
+
+Copy-VMFile -Name minikube -SourcePath &#39;C:\Users\runto.lv\.minikube\cache\v1.17.2\kubelet&#39; -DestinationPath &#39;/bin&#39; -FileSource Host
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;给执行权限&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubelet&amp;quot;
+
+minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubeadm&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>python 实现阿里云DNS动态解析</title>
+      <link>https://blog.runto.lv/post/aliyun/aliyun_ddns_api.html</link>
+      <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/aliyun/aliyun_ddns_api.html</guid>
+      
+        <description>
+
+&lt;h1 id=&#34;阿里云dns动态解析&#34;&gt;阿里云DNS动态解析&lt;/h1&gt;
+
+&lt;p&gt;支持多解析记录&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/runto-lv/aliyunddns.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;如果提示版本太低使用下面的命令更新&lt;code&gt;pip install -U pip&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;安装-python-sdk-pyaml&#34;&gt;安装 python sdk, pyaml&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;pip install aliyun-python-sdk-alidns pyaml -i https://mirrors.aliyun.com/pypi/simple
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;修改配置文件-setting-yaml&#34;&gt;修改配置文件 setting.yaml&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;cp setting.yaml.sample setting.yaml
+vi setting.yaml
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;# 阿里云 Access Key ID
+access_key_id: &amp;quot;XXX&amp;quot;
+
+# 阿里云 Access Key Secret
+access_key_secret: &amp;quot;XXXXXX&amp;quot;
+
+# 阿里云 一级域名
+rc_domain: &#39;github.com&#39;
+
+# 解析记录
+rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;access-key&#34;&gt;Access Key&lt;/h2&gt;
+
+&lt;p&gt;通过&lt;a href=&#34;https://ak-console.aliyun.com/#/accesskey&#34;&gt;阿里云Access Key管理&lt;/a&gt;, 获取access_key_id，access_key_secret。&lt;/p&gt;
+
+&lt;h2 id=&#34;添加域名解析记录&#34;&gt;添加域名解析记录&lt;/h2&gt;
+
+&lt;p&gt;修改好你使用的一级域名，通过&lt;a href=&#34;https://netcn.console.aliyun.com/core/domain/list&#34;&gt;阿里云域名管理&lt;/a&gt;，添加A记录，对一级域名的解析使用记录值为‘*’，A记录可以为你的二级域名，如 www.github.com, *.git.github.com。记录值随便写 8.8.8.8，因为后面会根据实际的IP进行动态更改。&lt;/p&gt;
+
+&lt;h2 id=&#34;crontab-定时运行&#34;&gt;crontab 定时运行&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;crontab -e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;# Run at every 10th minute
+# */10 * * * * /usr/bin/python /path_to/aliyun_ddns.py &amp;gt;&amp;gt; /path_to/run.log 2&amp;gt;&amp;amp;1
+* * * * * /usr/bin/python /shell/aliyunddns/aliyun_ddns.py /dev/null 1&amp;gt;/dev/null
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>群晖NAS上面使用Docker运行gitlab</title>
+      <link>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</guid>
+      
+        <description>&lt;p&gt;在群晖NAS上面可以通过下面的命令快速创建一个gitlab&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; docker run -d  \
+ -p 8443:443 \
+ -p 8080:80 \
+ -p 222:22 \
+ --name gitlab \
+ --restart always \
+ -v /volume1/docker/Gitlab/config:/etc/gitlab \
+ -v /volume1/docker/Gitlab/logs:/var/log/gitlab \
+ -v /volume1/docker/Gitlab/data:/var/opt/gitlab \
+ gitlab/gitlab-ce
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打开登陆界面 ，会要求修改密码，&lt;/p&gt;
+
+&lt;p&gt;修改密码过后就可以登陆了，用户名为root,密码为修改过的密码&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>企业中Docker&#43;Openvpn&#43;LDAP&#43;OTP快速搭建VPN</title>
+      <link>https://blog.runto.lv/post/openvpn/openvpn_ldap_otp.html</link>
+      <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/openvpn/openvpn_ldap_otp.html</guid>
+      
+        <description>&lt;p&gt;只需要修改下面几个参数即可&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;OVPN_SERVER_CN&lt;/code&gt;是外部的地址,比如公司对外开放的公网IP或是域名&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LDAP_URI&lt;/code&gt;是写AD服务器的地址&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LDAP_BASE_DN&lt;/code&gt;是自己的搜索用户的范围&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;LDAP_BIND_USER_DN&lt;/code&gt;这个是一个普通用户的Base dn路径,可以在域控用户属性编辑器中查到,这个普通 用户就可以了,不要使用管理员&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;LDAP_BIND_USER_PASS&lt;/code&gt;上面用户的密码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;docker run \
+--name openvpn \
+--volume /home/openvpn:/etc/openvpn \
+-v /etc/localtime:/etc/localtime:ro \
+--detach=true \
+--restart=always  \
+-p 1194:1194/udp \
+-e &amp;quot;OVPN_PROTOCOL=udp&amp;quot; \
+-e &amp;quot;OVPN_SERVER_CN=vpn.runto.lv&amp;quot; \
+-e &amp;quot;LDAP_URI=ldap://10.0.10.20&amp;quot; \
+-e &amp;quot;LDAP_BASE_DN=dc=runto,dc=lv&amp;quot; \
+-e &amp;quot;LDAP_BIND_USER_DN=cn=ad,cn=Users,dc=runto,dc=lv&amp;quot; \
+-e &amp;quot;LDAP_BIND_USER_PASS=P@ssw0rd&amp;quot; \
+-e &amp;quot;ACTIVE_DIRECTORY_COMPAT_MODE=true&amp;quot; \
+-e &amp;quot;ENABLE_OTP=true&amp;quot; \
+-e &amp;quot;DEBUG=true&amp;quot; \
+--cap-add=NET_ADMIN \
+wheelybird/openvpn-ldap-otp
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+      
+    </item>
+    
   </channel>
 </rss>

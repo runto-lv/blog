@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>gitlab on Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/tags/gitlab.html</link>
+    <description>Recent content in gitlab on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 04 May 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://blog.runto.lv/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>群晖NAS上面使用Docker运行gitlab</title>
+      <link>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</link>
+      <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</guid>
+      <description>在群晖NAS上面可以通过下面的命令快速创建一个gitlab docker run -d \ -p 8443:443 \ -p 8080:80 \ -p 222:22 \ --name gitlab \ --restart always \ -v /volume1/docker/Gitlab/config:/etc/gitlab \ -v /volume1/docker/Gitlab/logs:/var/log/gitlab \ -v /volume1/docker/Gitlab/data:/var/opt/gitlab \ gitlab/gitlab-ce 打开登陆界面 ，会要求修改</description>
+    </item>
+    
+  </channel>
+</rss>

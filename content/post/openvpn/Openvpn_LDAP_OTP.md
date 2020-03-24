@@ -15,11 +15,13 @@ categories = [
 +++
 
 只需要修改下面几个参数即可
+
 - `OVPN_SERVER_CN`是外部的地址,比如公司对外开放的公网IP或是域名
 - `LDAP_URI`是写AD服务器的地址
 - `LDAP_BASE_DN`是自己的搜索用户的范围
 - `LDAP_BIND_USER_DN`这个是一个普通用户的Base dn路径,可以在域控用户属性编辑器中查到,这个普通 用户就可以了,不要使用管理员
 - `LDAP_BIND_USER_PASS`上面用户的密码
+
 ```
 docker run \
 --name openvpn \
