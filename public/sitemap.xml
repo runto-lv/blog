@@ -86,6 +86,62 @@
   </url>
   
   <url>
+    <loc>https://blog.runto.lv/categories/linux.html</loc>
+    <lastmod>2019-11-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/wordpress.html</loc>
+    <lastmod>2019-11-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</loc>
+    <lastmod>2019-11-14T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/post/linux/wordpress_install.html</loc>
+    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/linux.html</loc>
+    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/mysql.html</loc>
+    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/nginx.html</loc>
+    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://blog.runto.lv/tags/php.html</loc>
+    <lastmod>2019-11-13T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
     <loc>https://blog.runto.lv/tags/keepalived.html</loc>
     <lastmod>2019-10-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -94,27 +150,6 @@
   
   <url>
     <loc>https://blog.runto.lv/post/linux/keepalived.html</loc>
-    <lastmod>2019-10-16T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.runto.lv/categories/linux.html</loc>
-    <lastmod>2019-10-16T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.runto.lv/tags/linux.html</loc>
-    <lastmod>2019-10-16T00:00:00+00:00</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.5</priority>
-  </url>
-  
-  <url>
-    <loc>https://blog.runto.lv/tags/mysql.html</loc>
     <lastmod>2019-10-16T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

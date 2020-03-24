@@ -161,6 +161,205 @@ alter database recover managed standby database finish force;
     </item>
     
     <item>
+      <title>Wordpress主题安装失败无法访问的解决办法</title>
+      <link>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</guid>
+      
+        <description>
+
+&lt;p&gt;我们在wordpress主题theme配置的时候，会从网站上下载比较流行的theme，有不顺利的时候，你下载的theme有bug或者下载包出问题了，安装过后你的web页面不能在访问了。悲催，想通过web将theme改回去也不行。我们只能够通过后台数据库来手动修改theme了。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;1-先登陆数据库&#34;&gt;1.先登陆数据库&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@wordpress themes]# mysql -u root -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 1982
+Server version: 5.5.64-MariaDB MariaDB Server
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
+
+MariaDB [(none)]&amp;gt; use wordpress
+MariaDB [wordpress]&amp;gt; SELECT *
+    -&amp;gt; FROM wp_options
+    -&amp;gt; WHERE option_name = &#39;template&#39;
+    -&amp;gt; OR option_name = &#39;stylesheet&#39;
+    -&amp;gt; OR option_name = &#39;current_theme&#39;;
++-----------+---------------+--------------+----------+
+| option_id | option_name   | option_value | autoload |
++-----------+---------------+--------------+----------+
+|       160 | current_theme | Jenney       | yes      |
+|        41 | stylesheet    | jenney       | yes      |
+|        40 | template      | jenney       | yes      |
++-----------+---------------+--------------+----------+
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从上面看到,当前使用了一个有问题的&amp;rsquo;jenney&amp;rsquo;的主题&lt;/p&gt;
+
+&lt;h3 id=&#34;2-修改数据库&#34;&gt;2.修改数据库&lt;/h3&gt;
+
+&lt;p&gt;在&lt;code&gt;/usr/share/nginx/wordpress/wp-content/themes&lt;/code&gt;目录,找到一个已经存在的主题,这里就选&lt;code&gt;win10explore&lt;/code&gt;,然后执行下面的命令,更新数据库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;template&#39;;
+ 
+UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;stylesheet&#39;;
+ 
+UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;current_theme&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体执行结果如下&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;template&#39;;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [wordpress]&amp;gt;  
+MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;stylesheet&#39;;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [wordpress]&amp;gt;  
+MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;current_theme&#39;;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>Centos7上安装Wordpress</title>
+      <link>https://blog.runto.lv/post/linux/wordpress_install.html</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/linux/wordpress_install.html</guid>
+      
+        <description>
+
+&lt;h3 id=&#34;1-安装mysql&#34;&gt;1.安装mysql&lt;/h3&gt;
+
+&lt;p&gt;yum -y install mariadb-server
+修改配置文件my.cnf,mysqld段添加下面的内容&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;character-set-server=utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;启动mysql&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;设置mysql,并设置root密码&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql_secure_installation
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建wordpress数据库&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql -u root -p
+
+SQL&amp;gt; create database wordpress;
+SQL&amp;gt; grant all privileges on wordpress.* to wp@&#39;localhost&#39; identified by &#39;R*****F&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-安装php-php-fpm&#34;&gt;2.安装php php-fpm&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install php74 php74-php-fpm php74-php-pecl-mysql
+systemctl enable php74-php-fpm &amp;amp;&amp;amp; systemctl start php74-php-fpm
+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;修改下面这个配置文件的内容,否则无法下载插件,会弹出FTP的窗口&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/opt/remi/php74/php-fpm.d/www.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;把&lt;code&gt;user = apache&lt;/code&gt;修改成&lt;code&gt;user = nginx&lt;/code&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;参考这个网址&lt;/strong&gt;:&lt;a href=&#34;https://blog.csdn.net/c332030/article/details/89117206&#34;&gt;https://blog.csdn.net/c332030/article/details/89117206&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;3-安装wordpress&#34;&gt;3.安装wordpress&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/share/nginx
+wget https://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建wordpressp配置文件，从 simple文件复制&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd wordpress
+cp  wp-config-sample.php wp-config.php
+--------------------------------------
+define( &#39;DB_NAME&#39;, &#39;wordpress&#39; );
+
+/** MySQL database username */
+define( &#39;DB_USER&#39;, &#39;wp&#39; );
+
+/** MySQL database password */
+define( &#39;DB_PASSWORD&#39;, &#39;R*****F&#39; );
+
+/** MySQL hostname */
+define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;4-安装nginx&#34;&gt;4.安装nginx&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;yum -y install nginx
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;nginx需要修改下面的字段&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;root         /usr/share/nginx/wordpress;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;location / {
+            index  index.php;
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;新增下面这段&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        location ~ .php$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置nginx站点目录权限&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chown nginx.nginx /usr/share/nginx/wordpress -R
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重启相关服务&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;systemctl restart nginx &amp;amp;&amp;amp; systemctl restart php74-php-fpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;5-登陆图形界面配置&#34;&gt;5.登陆图形界面配置&lt;/h3&gt;
+
+&lt;p&gt;访问下面的网址可以访问&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;http://IP地址
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;创建用户**&lt;strong&gt;&lt;em&gt;,密码&lt;/em&gt;&lt;/strong&gt;**&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
       <title>Keepalived用法</title>
       <link>https://blog.runto.lv/post/linux/keepalived.html</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>

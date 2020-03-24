@@ -39,18 +39,18 @@
     </item>
     
     <item>
-      <title>keepalived</title>
-      <link>https://blog.runto.lv/tags/keepalived.html</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      <title>wordpress</title>
+      <link>https://blog.runto.lv/tags/wordpress.html</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/tags/keepalived.html</guid>
+      <guid>https://blog.runto.lv/tags/wordpress.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>linux</title>
       <link>https://blog.runto.lv/tags/linux.html</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.runto.lv/tags/linux.html</guid>
       <description></description>
@@ -59,9 +59,36 @@
     <item>
       <title>mysql</title>
       <link>https://blog.runto.lv/tags/mysql.html</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://blog.runto.lv/tags/mysql.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://blog.runto.lv/tags/nginx.html</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/nginx.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>https://blog.runto.lv/tags/php.html</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/php.html</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>keepalived</title>
+      <link>https://blog.runto.lv/tags/keepalived.html</link>
+      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/tags/keepalived.html</guid>
       <description></description>
     </item>
     

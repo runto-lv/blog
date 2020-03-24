@@ -30,6 +30,24 @@
     </item>
     
     <item>
+      <title>Wordpress主题安装失败无法访问的解决办法</title>
+      <link>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</link>
+      <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</guid>
+      <description>我们在wordpress主题theme配置的时候，会从网站上下载比较流行的theme，有不顺利的时候，你下载的theme有bug或者下载包出</description>
+    </item>
+    
+    <item>
+      <title>Centos7上安装Wordpress</title>
+      <link>https://blog.runto.lv/post/linux/wordpress_install.html</link>
+      <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://blog.runto.lv/post/linux/wordpress_install.html</guid>
+      <description>1.安装mysql yum -y install mariadb-server 修改配置文件my.cnf,mysqld段添加下面的内容 character-set-server=utf8 启动mysql systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb 设置mysql,并设置root</description>
+    </item>
+    
+    <item>
       <title>Keepalived用法</title>
       <link>https://blog.runto.lv/post/linux/keepalived.html</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>linux on Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/tags/linux.html</link>
-    <description>Recent content in linux on Runto的IT技术博客</description>
+    <title>nginx on Runto的IT技术博客</title>
+    <link>https://blog.runto.lv/tags/nginx.html</link>
+    <description>Recent content in nginx on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Wed, 13 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.runto.lv/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://blog.runto.lv/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>https://blog.runto.lv/post/linux/wordpress_install.html</guid>
       <description>1.安装mysql yum -y install mariadb-server 修改配置文件my.cnf,mysqld段添加下面的内容 character-set-server=utf8 启动mysql systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb 设置mysql,并设置root</description>
-    </item>
-    
-    <item>
-      <title>Keepalived用法</title>
-      <link>https://blog.runto.lv/post/linux/keepalived.html</link>
-      <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.runto.lv/post/linux/keepalived.html</guid>
-      <description>测试一下图片 抽象流程 Rainbond的流程建立在以应用为中心抽象基础上，以交付为目的 场景流程 互联网公司交付流程 企业软件公司交付流程 行业云交付</description>
     </item>
     
   </channel>

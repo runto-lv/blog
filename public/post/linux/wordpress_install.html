@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 
-<head><title>归档 - Runto的IT技术博客的博客</title><meta name="baidu-site-verification" content="jZRrwlvEpq" />
+<head><title> Centos7上安装Wordpress - Runto的IT技术博客</title><meta name="baidu-site-verification" content="jZRrwlvEpq" />
 <meta name="google-site-verification" content="OcQLxKrUrj5A9hpAdCQuoY-K7f5Ja4LUYt35Kxdwq_E" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="description" content="Runto的IT技术博客的博客" />
@@ -51,7 +51,7 @@
 
                     </li>
                     
-                    <li class="menu-item active">
+                    <li class="menu-item">
                     
                     
                     
@@ -108,12 +108,19 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     
-                    <h1>Posts</h1>
+                    <h1>Centos7上安装Wordpress</h1>
 
                     
-                    <span class="meta">@Runto的IT技术博客 &nbsp;2020-03-21</span>
+                    <span class="meta">@Runto的IT技术博客 &nbsp;2019-11-13</span>
                     <div class="tags post-tags">
-                        
+                        <div class="post-tags">
+                            <a href="https://blog.runto.lv/tags/wordpress.html">wordpress</a>
+                            <a href="https://blog.runto.lv/tags/linux.html">linux</a>
+                            <a href="https://blog.runto.lv/tags/nginx.html">nginx</a>
+                            <a href="https://blog.runto.lv/tags/php.html">php</a>
+                            <a href="https://blog.runto.lv/tags/mysql.html">mysql</a>
+                            
+                        </div>
                     </div>
                 </div>
             </div>
@@ -123,114 +130,133 @@
 
 
     
-<div class="container-fluid archive-page clearfix">
-    <div class="categorys-item">
-    
-    <div class="categorys-title">2020年3月</div>
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/other/first.html">测试一下</a>
+
+<div class="container">
+    <div class="am-g am-g-fixed blog-fixed">
+        <div class="am-u-lg-12 am-u-sm-12">
+            <article class="am-article blog-article-p article-trigger">
+                <div id="post-content" class="am-article-bd">
+                    
+
+<h3 id="1-安装mysql">1.安装mysql</h3>
+
+<p>yum -y install mariadb-server
+修改配置文件my.cnf,mysqld段添加下面的内容</p>
+
+<pre><code>character-set-server=utf8
+</code></pre>
+
+<p>启动mysql</p>
+
+<pre><code>systemctl enable mariadb &amp;&amp; systemctl start mariadb
+</code></pre>
+
+<p>设置mysql,并设置root密码</p>
+
+<pre><code>mysql_secure_installation
+</code></pre>
+
+<p>创建wordpress数据库</p>
+
+<pre><code>mysql -u root -p
+
+SQL&gt; create database wordpress;
+SQL&gt; grant all privileges on wordpress.* to wp@'localhost' identified by 'R*****F';
+</code></pre>
+
+<h3 id="2-安装php-php-fpm">2.安装php php-fpm</h3>
+
+<pre><code>yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum -y install php74 php74-php-fpm php74-php-pecl-mysql
+systemctl enable php74-php-fpm &amp;&amp; systemctl start php74-php-fpm
+
+</code></pre>
+
+<p>修改下面这个配置文件的内容,否则无法下载插件,会弹出FTP的窗口</p>
+
+<pre><code>vim /etc/opt/remi/php74/php-fpm.d/www.conf
+</code></pre>
+
+<p>把<code>user = apache</code>修改成<code>user = nginx</code></p>
+
+<blockquote>
+<p><strong>参考这个网址</strong>:<a href="https://blog.csdn.net/c332030/article/details/89117206">https://blog.csdn.net/c332030/article/details/89117206</a></p>
+</blockquote>
+
+<h3 id="3-安装wordpress">3.安装wordpress</h3>
+
+<pre><code>cd /usr/share/nginx
+wget https://wordpress.org/latest.tar.gz
+tar -xzvf latest.tar.gz
+</code></pre>
+
+<p>创建wordpressp配置文件，从 simple文件复制</p>
+
+<pre><code>cd wordpress
+cp  wp-config-sample.php wp-config.php
+--------------------------------------
+define( 'DB_NAME', 'wordpress' );
+
+/** MySQL database username */
+define( 'DB_USER', 'wp' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'R*****F' );
+
+/** MySQL hostname */
+define( 'DB_HOST', 'localhost' );
+</code></pre>
+
+<h3 id="4-安装nginx">4.安装nginx</h3>
+
+<pre><code>yum -y install nginx
+</code></pre>
+
+<p>nginx需要修改下面的字段</p>
+
+<pre><code>root         /usr/share/nginx/wordpress;
+</code></pre>
+
+<pre><code>location / {
+            index  index.php;
+        }
+</code></pre>
+
+<p>新增下面这段</p>
+
+<pre><code>        location ~ .php$ {
+            fastcgi_pass   127.0.0.1:9000;
+            fastcgi_index  index.php;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+        }
+</code></pre>
+
+<p>配置nginx站点目录权限</p>
+
+<pre><code>chown nginx.nginx /usr/share/nginx/wordpress -R
+</code></pre>
+
+<p>重启相关服务</p>
+
+<pre><code>systemctl restart nginx &amp;&amp; systemctl restart php74-php-fpm
+</code></pre>
+
+<h3 id="5-登陆图形界面配置">5.登陆图形界面配置</h3>
+
+<p>访问下面的网址可以访问</p>
+
+<pre><code>http://IP地址
+</code></pre>
+
+<p>创建用户**<strong><em>,密码</em></strong>**</p>
+
                 </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Sat, 21 Mar 2020</div>
-                </div>
-            </div>
+            </article>
+            <hr>
         </div>
     </div>
-    
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/database/oracle_dataguard_standby.html">DataGuard standby数据库的日常维护</a>
-                </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Sat, 21 Mar 2020</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="categorys-title">2019年11月</div>
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/linux/wordpress_cannot_access.html">Wordpress主题安装失败无法访问的解决办法</a>
-                </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Thu, 14 Nov 2019</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/linux/wordpress_install.html">Centos7上安装Wordpress</a>
-                </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Wed, 13 Nov 2019</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="categorys-title">2019年10月</div>
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/database/mysql_conf.html">mysql双主模式两台Server配置文件</a>
-                </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Wed, 16 Oct 2019</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="post-list-item">
-        <div class="post-list-item-container">
-            <div class="item-label">
-                <div class="item-title">
-                    <a href="/post/linux/keepalived.html">Keepalived用法</a>
-                </div>
-                <div class="item-meta clearfix">
-                    <div class="item-meta-date">Wed, 16 Oct 2019</div>
-                </div>
-            </div>
-        </div>
-    </div></div>
 </div>
-
-
-
-
-
-  
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-  
-  
-
-
-
-
 
     <footer class="blog-footer">
     <div class="blog-text-center">© 2019 <a href="/">Runto的IT技术博客</a> 由 
