@@ -1,2 +1,2 @@
 User-agent: *
-Sitemap: https://blog.runto.lv/sitemap.xml
+Sitemap: https://www.runto.lv/sitemap.xml

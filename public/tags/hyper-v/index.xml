@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Hyper-v on Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/tags/hyper-v.html</link>
+    <link>https://www.runto.lv/tags/hyper-v.html</link>
     <description>Recent content in Hyper-v on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Tue, 01 Oct 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.runto.lv/tags/hyper-v/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.runto.lv/tags/hyper-v/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Hyper-v下安装minikube</title>
-      <link>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</link>
+      <link>https://www.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
+      <guid>https://www.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
       <description>本文参考网址：https://yq.aliyun.com/articles/221687 1. 打开powershell安装hyper-v的所有组</description>
     </item>
     

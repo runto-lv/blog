@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>kingdee on Runto的IT技术博客</title>
+    <link>https://www.runto.lv/tags/kingdee.html</link>
+    <description>Recent content in kingdee on Runto的IT技术博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 27 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://www.runto.lv/tags/kingdee/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>通过Rsync把EAS主应用端同步到备应用端</title>
+      <link>https://www.runto.lv/post/other/rsync_eas_app.html</link>
+      <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.runto.lv/post/other/rsync_eas_app.html</guid>
+      <description>通过Rsync把EAS主应用端同步到备应用端 原EAS只有一台服务器,为了防止这台服务器故障,导致EAS故障时间较久,现新增一台EAS服务器做</description>
+    </item>
+    
+  </channel>
+</rss>

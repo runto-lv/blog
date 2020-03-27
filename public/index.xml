@@ -2,44 +2,147 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/</link>
+    <link>https://www.runto.lv/</link>
     <description>Recent content on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://blog.runto.lv/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://www.runto.lv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>关于</title>
-      <link>https://blog.runto.lv/about.html</link>
-      <pubDate>Sun, 20 Aug 2017 21:38:52 +0800</pubDate>
+      <link>https://www.runto.lv/about.html</link>
+      <pubDate>Sat, 20 Apr 2019 21:38:52 +0800</pubDate>
       
-      <guid>https://blog.runto.lv/about.html</guid>
+      <guid>https://www.runto.lv/about.html</guid>
       
-        <description>&lt;p&gt;Hugo is a static site engine written in Go.&lt;/p&gt;
+        <description>
 
-&lt;p&gt;It makes use of a variety of open source projects including:&lt;/p&gt;
+&lt;h1 id=&#34;关于本博客&#34;&gt;关于本博客&lt;/h1&gt;
+
+&lt;p&gt;本站点是基于&lt;a href=&#34;https://github.com/gohugoio/hugo&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;搭建,主题是使用的&lt;a href=&#34;https://heemooo.gitee.io/&#34;&gt;&lt;strong&gt;景阳冈上挨过打&lt;/strong&gt;&lt;/a&gt;的&lt;a href=&#34;https://github.com/Heemooo/hugo-theme-amaze&#34;&gt;&lt;strong&gt;hugo-theme-amaze&lt;/strong&gt;&lt;/a&gt;主题&lt;/p&gt;
+
+&lt;p&gt;感谢&lt;strong&gt;Hugo开源组织&lt;/strong&gt;及&lt;a href=&#34;https://heemooo.gitee.io/&#34;&gt;&lt;strong&gt;景阳冈上挨过打&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;关于我&#34;&gt;关于我&lt;/h1&gt;
+
+&lt;p&gt;本人从事运维的工作,对Linux,云计算,K8S,虚拟化等IT技术非常感兴趣&lt;/p&gt;
+
+&lt;p&gt;此博客里面的内容都是之前踩过的坑的解决办法和一些自己搭建起来的系统的步骤.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;联系我&#34;&gt;联系我&lt;/h1&gt;
+
+&lt;p&gt;Github的主页,欢迎加星: &lt;strong&gt;&lt;a href=&#34;https://github.com/runto-lv&#34;&gt;https://github.com/runto-lv&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Email: &lt;strong&gt;&lt;a href=&#34;mailto:runto@runto.lv&#34;&gt;runto@runto.lv&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;如果想沟通交流技术相关,可以加我的微信:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;./post/images/bbb.png&#34; alt=&#34;wechat&#34; /&gt;&lt;/p&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>通过Rsync把EAS主应用端同步到备应用端</title>
+      <link>https://www.runto.lv/post/other/rsync_eas_app.html</link>
+      <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.runto.lv/post/other/rsync_eas_app.html</guid>
+      
+        <description>
+
+&lt;h1 id=&#34;通过rsync把eas主应用端同步到备应用端&#34;&gt;通过Rsync把EAS主应用端同步到备应用端&lt;/h1&gt;
+
+&lt;p&gt;原EAS只有一台服务器,为了防止这台服务器故障,导致EAS故障时间较久,现新增一台EAS服务器做为备用,主eas服务器每天定时通过rsync命令,把文件同步到备服务器,防止一台服务故障,导致服务长时间不可用&lt;/p&gt;
+
+&lt;h1 id=&#34;环境&#34;&gt;环境&lt;/h1&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cobra&#34;&gt;Cobra&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/viper&#34;&gt;Viper&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/jWalterWeatherman&#34;&gt;J Walter Weatherman&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/spf13/cast&#34;&gt;Cast&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源主机,主EAS应用端:10.0.2.68&lt;/li&gt;
+&lt;li&gt;目标主机,备EAS应用端:10.0.2.25&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h1&gt;
+
+&lt;p&gt;在源主机上面执行rsync命令,把/kingdee82文件夹里面的数据同步到备应用端,每天一次&lt;/p&gt;
+
+&lt;h3 id=&#34;1-在目标服务器上面做如下操作&#34;&gt;1.在目标服务器上面做如下操作&lt;/h3&gt;
+
+&lt;hr /&gt;
+
+&lt;pre&gt;&lt;code&gt;yum -y install xinetd rsync 
+
+vim /etc/rsyncd.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输入下面的内容&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;uid=root                                    #以指定的 UID 传输文件
+gid=root                                    #以指定的 GID 传输文件
+hosts allow=10.0.2.68                  #允许指定主机访问
+hosts deny=*                                #阻止指定主机访问
+use chroot=yes
+max connections=10                          #允许的最大连接数
+pid file=/var/run/rsyncd.pid                #指定pid文件路径
+lock file=/var/run/rsync.lock               #指定进程锁文件
+log file=/var/log/rsyncd.log                #指定日志路径
+timeout=600                                 #连接超时时间
+port=873                                    #指定tcp端口
+
+[backup]
+path = /home/rsync
+# hosts you allow to access
+hosts allow = 10.0.2.68
+hosts deny = *
+list = true
+uid = root
+gid = root
+read only = false
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;chkconfig xinetd on
+chkconfig rsync on
+/etc/init.d/xinetd restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;2-在源服务器上执行如下操作&#34;&gt;2.在源服务器上执行如下操作&lt;/h3&gt;
+
+&lt;p&gt;下面这个操作,是把本地/home/rsync文件夹同步到备服务器的,但这个未启用&lt;code&gt;强一致性&lt;/code&gt;,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync -avz  /home/rsync/ 10.0.2.25::backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以应使用下面这个命令,这个是两个目录 完全保持一致,源删除,目标也删除&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;3-设置定时任务&#34;&gt;3.设置定时任务&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;vim /etc/crontab
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;加入下面的内容&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;00 4 * * * root        rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+&lt;/code&gt;&lt;/pre&gt;
 </description>
       
     </item>
     
     <item>
       <title>DataGuard standby数据库的日常维护</title>
-      <link>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</link>
+      <link>https://www.runto.lv/post/database/oracle_dataguard_standby.html</link>
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/database/oracle_dataguard_standby.html</guid>
+      <guid>https://www.runto.lv/post/database/oracle_dataguard_standby.html</guid>
       
         <description>
 
@@ -145,27 +248,11 @@ alter database recover managed standby database finish force;
     </item>
     
     <item>
-      <title>测试一下</title>
-      <link>https://blog.runto.lv/post/other/first.html</link>
-      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://blog.runto.lv/post/other/first.html</guid>
-      
-        <description>
-
-&lt;h1 id=&#34;这是一个测试站点&#34;&gt;这是一个测试站点&lt;/h1&gt;
-
-&lt;p&gt;安装完成后，hugo是没有默认的主题的，可以去主题官网上下载主题： 直接clone主题到云服务器上的themes下&lt;/p&gt;
-</description>
-      
-    </item>
-    
-    <item>
       <title>Wordpress主题安装失败无法访问的解决办法</title>
-      <link>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</link>
+      <link>https://www.runto.lv/post/linux/wordpress_cannot_access.html</link>
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</guid>
+      <guid>https://www.runto.lv/post/linux/wordpress_cannot_access.html</guid>
       
         <description>
 
@@ -236,10 +323,10 @@ Rows matched: 1  Changed: 1  Warnings: 0
     
     <item>
       <title>Centos7上安装Wordpress</title>
-      <link>https://blog.runto.lv/post/linux/wordpress_install.html</link>
+      <link>https://www.runto.lv/post/linux/wordpress_install.html</link>
       <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/wordpress_install.html</guid>
+      <guid>https://www.runto.lv/post/linux/wordpress_install.html</guid>
       
         <description>
 
@@ -361,10 +448,10 @@ define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
     
     <item>
       <title>Keepalived用法</title>
-      <link>https://blog.runto.lv/post/linux/keepalived.html</link>
+      <link>https://www.runto.lv/post/linux/keepalived.html</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/keepalived.html</guid>
+      <guid>https://www.runto.lv/post/linux/keepalived.html</guid>
       
         <description>
 
@@ -401,10 +488,10 @@ define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
     
     <item>
       <title>mysql双主模式两台Server配置文件</title>
-      <link>https://blog.runto.lv/post/database/mysql_conf.html</link>
+      <link>https://www.runto.lv/post/database/mysql_conf.html</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/database/mysql_conf.html</guid>
+      <guid>https://www.runto.lv/post/database/mysql_conf.html</guid>
       
         <description>&lt;p&gt;mysql master&lt;/p&gt;
 
@@ -474,10 +561,10 @@ pid-file=/var/run/mariadb/mariadb.pid
     
     <item>
       <title>Hyper-v下安装minikube</title>
-      <link>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</link>
+      <link>https://www.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
+      <guid>https://www.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
       
         <description>
 
@@ -547,10 +634,10 @@ minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubeadm&amp;quot;
     
     <item>
       <title>python 实现阿里云DNS动态解析</title>
-      <link>https://blog.runto.lv/post/aliyun/aliyun_ddns_api.html</link>
+      <link>https://www.runto.lv/post/aliyun/aliyun_ddns_api.html</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/aliyun/aliyun_ddns_api.html</guid>
+      <guid>https://www.runto.lv/post/aliyun/aliyun_ddns_api.html</guid>
       
         <description>
 
@@ -612,10 +699,10 @@ rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
     
     <item>
       <title>群晖NAS上面使用Docker运行gitlab</title>
-      <link>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</link>
+      <link>https://www.runto.lv/post/synology/synology_docker_gitlab.html</link>
       <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/synology/synology_docker_gitlab.html</guid>
+      <guid>https://www.runto.lv/post/synology/synology_docker_gitlab.html</guid>
       
         <description>&lt;p&gt;在群晖NAS上面可以通过下面的命令快速创建一个gitlab&lt;/p&gt;
 
@@ -640,10 +727,10 @@ rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
     
     <item>
       <title>企业中Docker&#43;Openvpn&#43;LDAP&#43;OTP快速搭建VPN</title>
-      <link>https://blog.runto.lv/post/openvpn/openvpn_ldap_otp.html</link>
+      <link>https://www.runto.lv/post/openvpn/openvpn_ldap_otp.html</link>
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/openvpn/openvpn_ldap_otp.html</guid>
+      <guid>https://www.runto.lv/post/openvpn/openvpn_ldap_otp.html</guid>
       
         <description>&lt;p&gt;只需要修改下面几个参数即可&lt;/p&gt;
 

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>test on Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/tags/test.html</link>
+    <link>https://www.runto.lv/tags/test.html</link>
     <description>Recent content in test on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.runto.lv/tags/test/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.runto.lv/tags/test/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>测试一下</title>
-      <link>https://blog.runto.lv/post/other/first.html</link>
+      <link>https://www.runto.lv/post/other/first.html</link>
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/other/first.html</guid>
+      <guid>https://www.runto.lv/post/other/first.html</guid>
       <description>这是一个测试站点 安装完成后，hugo是没有默认的主题的，可以去主题官网上下载主题： 直接clone主题到云服务器上的themes下</description>
     </item>
     

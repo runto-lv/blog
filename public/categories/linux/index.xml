@@ -2,39 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>linux on Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/categories/linux.html</link>
+    <link>https://www.runto.lv/categories/linux.html</link>
     <description>Recent content in linux on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 14 Nov 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.runto.lv/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.runto.lv/categories/linux/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Wordpress主题安装失败无法访问的解决办法</title>
-      <link>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</link>
+      <link>https://www.runto.lv/post/linux/wordpress_cannot_access.html</link>
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/wordpress_cannot_access.html</guid>
+      <guid>https://www.runto.lv/post/linux/wordpress_cannot_access.html</guid>
       <description>我们在wordpress主题theme配置的时候，会从网站上下载比较流行的theme，有不顺利的时候，你下载的theme有bug或者下载包出</description>
     </item>
     
     <item>
       <title>Centos7上安装Wordpress</title>
-      <link>https://blog.runto.lv/post/linux/wordpress_install.html</link>
+      <link>https://www.runto.lv/post/linux/wordpress_install.html</link>
       <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/wordpress_install.html</guid>
+      <guid>https://www.runto.lv/post/linux/wordpress_install.html</guid>
       <description>1.安装mysql yum -y install mariadb-server 修改配置文件my.cnf,mysqld段添加下面的内容 character-set-server=utf8 启动mysql systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb 设置mysql,并设置root</description>
     </item>
     
     <item>
       <title>Keepalived用法</title>
-      <link>https://blog.runto.lv/post/linux/keepalived.html</link>
+      <link>https://www.runto.lv/post/linux/keepalived.html</link>
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/post/linux/keepalived.html</guid>
+      <guid>https://www.runto.lv/post/linux/keepalived.html</guid>
       <description>测试一下图片 抽象流程 Rainbond的流程建立在以应用为中心抽象基础上，以交付为目的 场景流程 互联网公司交付流程 企业软件公司交付流程 行业云交付</description>
     </item>
     

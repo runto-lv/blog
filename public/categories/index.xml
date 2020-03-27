@@ -2,75 +2,75 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Runto的IT技术博客</title>
-    <link>https://blog.runto.lv/categories.html</link>
+    <link>https://www.runto.lv/categories.html</link>
     <description>Recent content in Categories on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://blog.runto.lv/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.runto.lv/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Database</title>
-      <link>https://blog.runto.lv/categories/database.html</link>
-      <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
+      <title>other</title>
+      <link>https://www.runto.lv/categories/other.html</link>
+      <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/database.html</guid>
+      <guid>https://www.runto.lv/categories/other.html</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Other</title>
-      <link>https://blog.runto.lv/categories/other.html</link>
+      <title>Database</title>
+      <link>https://www.runto.lv/categories/database.html</link>
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/other.html</guid>
+      <guid>https://www.runto.lv/categories/database.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>linux</title>
-      <link>https://blog.runto.lv/categories/linux.html</link>
+      <link>https://www.runto.lv/categories/linux.html</link>
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/linux.html</guid>
+      <guid>https://www.runto.lv/categories/linux.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>aliyun</title>
-      <link>https://blog.runto.lv/categories/aliyun.html</link>
+      <link>https://www.runto.lv/categories/aliyun.html</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/aliyun.html</guid>
+      <guid>https://www.runto.lv/categories/aliyun.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>kubernetes</title>
-      <link>https://blog.runto.lv/categories/kubernetes.html</link>
+      <link>https://www.runto.lv/categories/kubernetes.html</link>
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/kubernetes.html</guid>
+      <guid>https://www.runto.lv/categories/kubernetes.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>synology</title>
-      <link>https://blog.runto.lv/categories/synology.html</link>
+      <link>https://www.runto.lv/categories/synology.html</link>
       <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/synology.html</guid>
+      <guid>https://www.runto.lv/categories/synology.html</guid>
       <description></description>
     </item>
     
     <item>
       <title>openvpn</title>
-      <link>https://blog.runto.lv/categories/openvpn.html</link>
+      <link>https://www.runto.lv/categories/openvpn.html</link>
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.runto.lv/categories/openvpn.html</guid>
+      <guid>https://www.runto.lv/categories/openvpn.html</guid>
       <description></description>
     </item>
     

@@ -1,7 +1,7 @@
 # This is a simple configuration.
 # And see https://gohugo.io/getting-started/configuration/ .
 
-baseURL = "https://blog.runto.lv/"
+baseURL = "https://www.runto.lv/"
 title = "Runto的IT技术博客"
 theme= "hugo-theme-amaze"
 enableRobotsTXT = true
