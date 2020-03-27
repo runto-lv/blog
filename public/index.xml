@@ -8,7 +8,7 @@
     <language>zh-cn</language>
     <lastBuildDate>Fri, 27 Mar 2020 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://www.runto.lv/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://www.runto.lv/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,36 +17,7 @@
       <pubDate>Sat, 20 Apr 2019 21:38:52 +0800</pubDate>
       
       <guid>https://www.runto.lv/about.html</guid>
-      
-        <description>
-
-&lt;h1 id=&#34;关于本博客&#34;&gt;关于本博客&lt;/h1&gt;
-
-&lt;p&gt;本站点是基于&lt;a href=&#34;https://github.com/gohugoio/hugo&#34;&gt;&lt;strong&gt;Hugo&lt;/strong&gt;&lt;/a&gt;搭建,主题是使用的&lt;a href=&#34;https://heemooo.gitee.io/&#34;&gt;&lt;strong&gt;景阳冈上挨过打&lt;/strong&gt;&lt;/a&gt;的&lt;a href=&#34;https://github.com/Heemooo/hugo-theme-amaze&#34;&gt;&lt;strong&gt;hugo-theme-amaze&lt;/strong&gt;&lt;/a&gt;主题&lt;/p&gt;
-
-&lt;p&gt;感谢&lt;strong&gt;Hugo开源组织&lt;/strong&gt;及&lt;a href=&#34;https://heemooo.gitee.io/&#34;&gt;&lt;strong&gt;景阳冈上挨过打&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&#34;关于我&#34;&gt;关于我&lt;/h1&gt;
-
-&lt;p&gt;本人从事运维的工作,对Linux,云计算,K8S,虚拟化等IT技术非常感兴趣&lt;/p&gt;
-
-&lt;p&gt;此博客里面的内容都是之前踩过的坑的解决办法和一些自己搭建起来的系统的步骤.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h1 id=&#34;联系我&#34;&gt;联系我&lt;/h1&gt;
-
-&lt;p&gt;Github的主页,欢迎加星: &lt;strong&gt;&lt;a href=&#34;https://github.com/runto-lv&#34;&gt;https://github.com/runto-lv&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Email: &lt;strong&gt;&lt;a href=&#34;mailto:runto@runto.lv&#34;&gt;runto@runto.lv&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;如果想沟通交流技术相关,可以加我的微信:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;./post/images/bbb.png&#34; alt=&#34;wechat&#34; /&gt;&lt;/p&gt;
-</description>
-      
+      <description>关于本博客 本站点是基于Hugo搭建,主题是使用的景阳冈上挨过打的hugo-theme-amaze主题 感谢Hugo开源组织及景阳冈上挨过打 关于</description>
     </item>
     
     <item>
@@ -55,86 +26,7 @@
       <pubDate>Fri, 27 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/other/rsync_eas_app.html</guid>
-      
-        <description>
-
-&lt;h1 id=&#34;通过rsync把eas主应用端同步到备应用端&#34;&gt;通过Rsync把EAS主应用端同步到备应用端&lt;/h1&gt;
-
-&lt;p&gt;原EAS只有一台服务器,为了防止这台服务器故障,导致EAS故障时间较久,现新增一台EAS服务器做为备用,主eas服务器每天定时通过rsync命令,把文件同步到备服务器,防止一台服务故障,导致服务长时间不可用&lt;/p&gt;
-
-&lt;h1 id=&#34;环境&#34;&gt;环境&lt;/h1&gt;
-
-&lt;ul&gt;
-&lt;li&gt;源主机,主EAS应用端:10.0.2.68&lt;/li&gt;
-&lt;li&gt;目标主机,备EAS应用端:10.0.2.25&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h1 id=&#34;操作步骤&#34;&gt;操作步骤&lt;/h1&gt;
-
-&lt;p&gt;在源主机上面执行rsync命令,把/kingdee82文件夹里面的数据同步到备应用端,每天一次&lt;/p&gt;
-
-&lt;h3 id=&#34;1-在目标服务器上面做如下操作&#34;&gt;1.在目标服务器上面做如下操作&lt;/h3&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code&gt;yum -y install xinetd rsync 
-
-vim /etc/rsyncd.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输入下面的内容&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;uid=root                                    #以指定的 UID 传输文件
-gid=root                                    #以指定的 GID 传输文件
-hosts allow=10.0.2.68                  #允许指定主机访问
-hosts deny=*                                #阻止指定主机访问
-use chroot=yes
-max connections=10                          #允许的最大连接数
-pid file=/var/run/rsyncd.pid                #指定pid文件路径
-lock file=/var/run/rsync.lock               #指定进程锁文件
-log file=/var/log/rsyncd.log                #指定日志路径
-timeout=600                                 #连接超时时间
-port=873                                    #指定tcp端口
-
-[eas]
-path = /kingdee
-# hosts you allow to access
-hosts allow = 10.0.2.68
-hosts deny = *
-list = true
-uid = root
-gid = root
-read only = false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;chkconfig xinetd on
-chkconfig rsync on
-/etc/init.d/xinetd restart
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-在源服务器上执行如下操作&#34;&gt;2.在源服务器上执行如下操作&lt;/h3&gt;
-
-&lt;p&gt;下面这个操作,是把本地/kingdee文件夹同步到备服务器的,但这个未启用&lt;code&gt;强一致性&lt;/code&gt;,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;rsync -avz  /kingdee/ 10.0.2.25::eas
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;所以应使用下面这个命令,这个是两个目录 完全保持一致,源删除,目标也删除&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;rsync -avz --delete /kingdee/ 10.0.2.25::eas
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-设置定时任务&#34;&gt;3.设置定时任务&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;vim /etc/crontab
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;加入下面的内容&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;00 4 * * * root        rsync -avz --delete /kingdee/ 10.0.2.25::eas
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>通过Rsync把EAS主应用端同步到备应用端 原EAS只有一台服务器,为了防止这台服务器故障,导致EAS故障时间较久,现新增一台EAS服务器做</description>
     </item>
     
     <item>
@@ -143,97 +35,7 @@ chkconfig rsync on
       <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</guid>
-      
-        <description>
-
-&lt;h1 id=&#34;重建步骤&#34;&gt;重建步骤&lt;/h1&gt;
-
-&lt;h2 id=&#34;1-删除备库所有的数据文件-日志文件-控制文件&#34;&gt;1、删除备库所有的数据文件、日志文件、控制文件&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;/u01/app/oracle/oradata/orcl
-rm -rf *
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;进入闪回区，删除control02.ctl&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd /u01/app/oracle/flash_recovery_area
-rm -rf control02.ctl
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;2-备份备库的参数文件和密码文件&#34;&gt;2、备份备库的参数文件和密码文件&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;cd $ORACLE_HOME/dbs
-mv spfileorcl.ora spfileorcl.ora.bak
-cp orapworcl orapworcl.bak
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;3-进入主库连接辅库&#34;&gt;3、进入主库连接辅库&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;SQL&amp;gt; create spfile from pfile=&#39;/tmp/initorcl.ora&#39;;
-SQL&amp;gt; startup nomount;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;$ rman target sys/yH.20200316@orcldg auxiliary sys/yH.20200316@orclpr
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;4-复制主库数据文件-日志文件-控制文件-密码文件-参数文件到备库&#34;&gt;4、复制主库数据文件、日志文件、控制文件、密码文件、参数文件到备库&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;RMAN&amp;gt; duplicate target database for standby from active database nofilenamecheck;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;5-打开备库&#34;&gt;5、打开备库&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database open read only;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;6-应用日志&#34;&gt;6、应用日志&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database recover managed standby database using current logfile disconnect from session;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;7-检查日志应用状态&#34;&gt;7、检查日志应用状态&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;select sequence#,applied from v$archived_log;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;8-分别查看主库和备库的归档序列号是否一致&#34;&gt;8、分别查看主库和备库的归档序列号是否一致：&lt;/h2&gt;
-
-&lt;p&gt;主库上面执行&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;SQL&amp;gt; alter system switch logfile;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后再主备上面都执行下面这行命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;archive log list;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;执行结果:&lt;/p&gt;
-
-&lt;p&gt;主:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;SQL&amp;gt; archive log list;
-Database log mode	       Archive Mode
-Automatic archival	       Enabled
-Archive destination	       /u01/app/oracle/oradata/orcl/archivelog
-Oldest online log sequence     17
-Next log sequence to archive   19
-Current log sequence	       19
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;备:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;SQL&amp;gt; archive log list;
-Database log mode	       Archive Mode
-Automatic archival	       Enabled
-Archive destination	       /u01/app/oracle/oradata/orcl/archivelog
-Oldest online log sequence     17
-Next log sequence to archive   0
-Current log sequence	       19
-SQL&amp;gt; 
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>重建步骤 1、删除备库所有的数据文件、日志文件、控制文件 /u01/app/oracle/oradata/orcl rm -rf * 进入闪回区，删除control02.ctl cd /u01/app/oracle/flash_recovery_area rm -rf control02.ctl 2、备份备库的参数文件和密</description>
     </item>
     
     <item>
@@ -242,108 +44,7 @@ SQL&amp;gt;
       <pubDate>Sat, 21 Mar 2020 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/database/oracle_dataguard_standby.html</guid>
-      
-        <description>
-
-&lt;p&gt;参考网址：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;https://www.cnblogs.com/wlmq/articles/6069477.html
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;1-停止standby&#34;&gt;1.停止Standby&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;# 查看备库是否在应用日志进行恢复
-select process, status from v$managed_standby;
-
-alter database recover managed standby database cancel;
-shutdown immediate;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-切换到只读模式&#34;&gt;2.切换到只读模式&lt;/h3&gt;
-
-&lt;h4 id=&#34;2-1由shutdown模式切换到只读模式&#34;&gt;2.1由shutdown模式切换到只读模式&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;startup nomount;
-alter database mount standby database;
-alter database open read only;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;2-2由应用日志模式切换到只读模式&#34;&gt;2.2由应用日志模式切换到只读模式&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database recover managed standby database cancel; -- 取消日志应用
-alter database open read only;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;3-切换回管理恢复模式&#34;&gt;3.切换回管理恢复模式&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;startup nomount;
-alter database mount standby database;
-alter database open read only;
-alter database recover managed standby database disconnect from session;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&amp;ndash; 启动日志应用&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database recover managed standby database using current logfile disconnect from session;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-主库和备库之间角色切换&#34;&gt;4.主库和备库之间角色切换&lt;/h3&gt;
-
-&lt;p&gt;可以先使用下面这个命令查询一下各位的状态&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;select database_role,switchover_status from v$database;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;4-1-主库切换为备库&#34;&gt;4.1 主库切换为备库&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database commit to switchover to physical standby;
-
-# 主库有会话连接的时候,使用下面的，如果没有，可以使用上面的
-alter database commit to switchover to physical standby with session shutdown;
-
-shutdown immediate;
-startup nomount;
-alter database mount standby database;
-alter database recover managed standby database disconnect from session;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&#34;4-2-从库切换为主库&#34;&gt;4.2 从库切换为主库&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database commit to switchover to primary;
-shutdown immediate;
-startup
-alter system switch logfile;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;5-备库自动使用主库传过来的日志进行恢复&#34;&gt;5.备库自动使用主库传过来的日志进行恢复&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database recover automatic standby database;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;6-更改保护模式&#34;&gt;6.更改保护模式&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database set standby database to maximize protection;
-alter database set standby database to maximize availability;
-alter database set standby database to maximize performancen;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;7-取消自动恢复模式&#34;&gt;7.取消自动恢复模式&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;alter database recover managed standby database cancel;
-alter database recover managed standby database finish;
-alter database recover managed standby database finish force;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;8-查询同步状况&#34;&gt;8.查询同步状况&lt;/h3&gt;
-
-&lt;p&gt;其中如果apply lag对应的value大于0，那么就需要注意检查是否同步正常。如果相差时间非常多，value值等于几分钟，甚至达到1个小时，那可能实时同步有问题，需要检查 alert log 文件&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;select to_char(SYSDATE,&#39;yyyymmdd hh24:mi:ss&#39;) CTIME,NAME,VALUE,DATUM_TIME from V$DATAGUARD_STATS  WHERE NAME LIKE &#39;%lag&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>参考网址： https://www.cnblogs.com/wlmq/articles/6069477.html 1.停止Standby # 查看备库是否在应用日志进行恢复 select process, status from v$managed_standby; alter database recover managed standby database cancel; shutdown immediate; 2.切换到只读模式 2.1由shutdown模式</description>
     </item>
     
     <item>
@@ -352,72 +53,7 @@ alter database recover managed standby database finish force;
       <pubDate>Thu, 14 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/linux/wordpress_cannot_access.html</guid>
-      
-        <description>
-
-&lt;p&gt;我们在wordpress主题theme配置的时候，会从网站上下载比较流行的theme，有不顺利的时候，你下载的theme有bug或者下载包出问题了，安装过后你的web页面不能在访问了。悲催，想通过web将theme改回去也不行。我们只能够通过后台数据库来手动修改theme了。&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;h3 id=&#34;1-先登陆数据库&#34;&gt;1.先登陆数据库&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@wordpress themes]# mysql -u root -p
-Enter password: 
-Welcome to the MariaDB monitor.  Commands end with ; or \g.
-Your MariaDB connection id is 1982
-Server version: 5.5.64-MariaDB MariaDB Server
-
-Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
-
-Type &#39;help;&#39; or &#39;\h&#39; for help. Type &#39;\c&#39; to clear the current input statement.
-
-MariaDB [(none)]&amp;gt; use wordpress
-MariaDB [wordpress]&amp;gt; SELECT *
-    -&amp;gt; FROM wp_options
-    -&amp;gt; WHERE option_name = &#39;template&#39;
-    -&amp;gt; OR option_name = &#39;stylesheet&#39;
-    -&amp;gt; OR option_name = &#39;current_theme&#39;;
-+-----------+---------------+--------------+----------+
-| option_id | option_name   | option_value | autoload |
-+-----------+---------------+--------------+----------+
-|       160 | current_theme | Jenney       | yes      |
-|        41 | stylesheet    | jenney       | yes      |
-|        40 | template      | jenney       | yes      |
-+-----------+---------------+--------------+----------+
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;从上面看到,当前使用了一个有问题的&amp;rsquo;jenney&amp;rsquo;的主题&lt;/p&gt;
-
-&lt;h3 id=&#34;2-修改数据库&#34;&gt;2.修改数据库&lt;/h3&gt;
-
-&lt;p&gt;在&lt;code&gt;/usr/share/nginx/wordpress/wp-content/themes&lt;/code&gt;目录,找到一个已经存在的主题,这里就选&lt;code&gt;win10explore&lt;/code&gt;,然后执行下面的命令,更新数据库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;template&#39;;
- 
-UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;stylesheet&#39;;
- 
-UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;current_theme&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;具体执行结果如下&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;template&#39;;
-Query OK, 1 row affected (0.00 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-MariaDB [wordpress]&amp;gt;  
-MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;stylesheet&#39;;
-Query OK, 1 row affected (0.00 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-
-MariaDB [wordpress]&amp;gt;  
-MariaDB [wordpress]&amp;gt; UPDATE wp_options SET option_value = &#39;win10explore&#39; WHERE option_name = &#39;current_theme&#39;;
-Query OK, 1 row affected (0.00 sec)
-Rows matched: 1  Changed: 1  Warnings: 0
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>我们在wordpress主题theme配置的时候，会从网站上下载比较流行的theme，有不顺利的时候，你下载的theme有bug或者下载包出</description>
     </item>
     
     <item>
@@ -426,123 +62,7 @@ Rows matched: 1  Changed: 1  Warnings: 0
       <pubDate>Wed, 13 Nov 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/linux/wordpress_install.html</guid>
-      
-        <description>
-
-&lt;h3 id=&#34;1-安装mysql&#34;&gt;1.安装mysql&lt;/h3&gt;
-
-&lt;p&gt;yum -y install mariadb-server
-修改配置文件my.cnf,mysqld段添加下面的内容&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;character-set-server=utf8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;启动mysql&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;设置mysql,并设置root密码&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql_secure_installation
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;创建wordpress数据库&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql -u root -p
-
-SQL&amp;gt; create database wordpress;
-SQL&amp;gt; grant all privileges on wordpress.* to wp@&#39;localhost&#39; identified by &#39;R*****F&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-安装php-php-fpm&#34;&gt;2.安装php php-fpm&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;yum install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-yum -y install php74 php74-php-fpm php74-php-pecl-mysql
-systemctl enable php74-php-fpm &amp;amp;&amp;amp; systemctl start php74-php-fpm
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改下面这个配置文件的内容,否则无法下载插件,会弹出FTP的窗口&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim /etc/opt/remi/php74/php-fpm.d/www.conf
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;把&lt;code&gt;user = apache&lt;/code&gt;修改成&lt;code&gt;user = nginx&lt;/code&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;&lt;strong&gt;参考这个网址&lt;/strong&gt;:&lt;a href=&#34;https://blog.csdn.net/c332030/article/details/89117206&#34;&gt;https://blog.csdn.net/c332030/article/details/89117206&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;3-安装wordpress&#34;&gt;3.安装wordpress&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;cd /usr/share/nginx
-wget https://wordpress.org/latest.tar.gz
-tar -xzvf latest.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;创建wordpressp配置文件，从 simple文件复制&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd wordpress
-cp  wp-config-sample.php wp-config.php
---------------------------------------
-define( &#39;DB_NAME&#39;, &#39;wordpress&#39; );
-
-/** MySQL database username */
-define( &#39;DB_USER&#39;, &#39;wp&#39; );
-
-/** MySQL database password */
-define( &#39;DB_PASSWORD&#39;, &#39;R*****F&#39; );
-
-/** MySQL hostname */
-define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-安装nginx&#34;&gt;4.安装nginx&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;yum -y install nginx
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;nginx需要修改下面的字段&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;root         /usr/share/nginx/wordpress;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;location / {
-            index  index.php;
-        }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;新增下面这段&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;        location ~ .php$ {
-            fastcgi_pass   127.0.0.1:9000;
-            fastcgi_index  index.php;
-            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
-            include        fastcgi_params;
-        }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;配置nginx站点目录权限&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;chown nginx.nginx /usr/share/nginx/wordpress -R
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;重启相关服务&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;systemctl restart nginx &amp;amp;&amp;amp; systemctl restart php74-php-fpm
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;5-登陆图形界面配置&#34;&gt;5.登陆图形界面配置&lt;/h3&gt;
-
-&lt;p&gt;访问下面的网址可以访问&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;http://IP地址
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;创建用户**&lt;strong&gt;&lt;em&gt;,密码&lt;/em&gt;&lt;/strong&gt;**&lt;/p&gt;
-</description>
-      
+      <description>1.安装mysql yum -y install mariadb-server 修改配置文件my.cnf,mysqld段添加下面的内容 character-set-server=utf8 启动mysql systemctl enable mariadb &amp;amp;&amp;amp; systemctl start mariadb 设置mysql,并设置root</description>
     </item>
     
     <item>
@@ -551,38 +71,7 @@ define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/linux/keepalived.html</guid>
-      
-        <description>
-
-&lt;h2 id=&#34;测试一下图片&#34;&gt;测试一下图片&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&#34;../img/screenshot.png&#34; alt=&#34;1583138735899&#34; /&gt;&lt;/p&gt;
-
-&lt;h4 id=&#34;抽象流程&#34;&gt;抽象流程&lt;/h4&gt;
-
-&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/arch5.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Rainbond的流程建立在&lt;code&gt;以应用为中心&lt;/code&gt;抽象基础上，以交付为目的&lt;/p&gt;
-
-&lt;h4 id=&#34;场景流程&#34;&gt;场景流程&lt;/h4&gt;
-
-&lt;h5 id=&#34;互联网公司交付流程&#34;&gt;互联网公司交付流程&lt;/h5&gt;
-
-&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow1.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;企业软件公司交付流程&#34;&gt;企业软件公司交付流程&lt;/h5&gt;
-
-&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow2.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;行业云交付流程&#34;&gt;行业云交付流程&lt;/h5&gt;
-
-&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow3.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h5 id=&#34;大型企事业单位it流程&#34;&gt;大型企事业单位IT流程&lt;/h5&gt;
-
-&lt;p&gt;&lt;img width=&#34;100%&#34; src=&#34;http://grstatic.oss-cn-shanghai.aliyuncs.com/images/docs/5.0/architecture/flow4.png&#34;&gt;&lt;/img&gt;&lt;/p&gt;
-</description>
-      
+      <description>测试一下图片 抽象流程 Rainbond的流程建立在以应用为中心抽象基础上，以交付为目的 场景流程 互联网公司交付流程 企业软件公司交付流程 行业云交付</description>
     </item>
     
     <item>
@@ -591,71 +80,7 @@ define( &#39;DB_HOST&#39;, &#39;localhost&#39; );
       <pubDate>Wed, 16 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/database/mysql_conf.html</guid>
-      
-        <description>&lt;p&gt;mysql master&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-# Settings user and group are ignored when systemd is used.
-# If you need to run mysqld under a different user or group,
-# customize your systemd unit file for mariadb according to the
-# instructions in http://fedoraproject.org/wiki/Systemd
-server-id=2
-relay_log = mysql-relay-bin
-log_bin =mysql-bin
-log_slave_updates =1
-auto_increment_increment=2
-auto_increment_offset=2
-character-set-server=utf8
-lower_case_table_names=1
-
-[mysqld_safe]
-log-error=/var/log/mariadb/mariadb.log
-pid-file=/var/run/mariadb/mariadb.pid
-
-#
-# include all files from the config directory
-#
-!includedir /etc/my.cnf.d
-
-
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;mysql slave&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[mysqld]
-datadir=/var/lib/mysql
-socket=/var/lib/mysql/mysql.sock
-# Disabling symbolic-links is recommended to prevent assorted security risks
-symbolic-links=0
-# Settings user and group are ignored when systemd is used.
-# If you need to run mysqld under a different user or group,
-# customize your systemd unit file for mariadb according to the
-# instructions in http://fedoraproject.org/wiki/Systemd
-server-id = 1
-log-bin = binlog
-relay_log = mysql-relay-bin
-log_slave_updates =1
-auto_increment_increment=2
-auto_increment_offset=1
-character-set-server=utf8
-lower_case_table_names=1
-
-[mysqld_safe]
-log-error=/var/log/mariadb/mariadb.log
-pid-file=/var/run/mariadb/mariadb.pid
-
-#
-# include all files from the config directory
-#
-!includedir /etc/my.cnf.d
-
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>mysql master [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock # Disabling symbolic-links is recommended to prevent assorted security risks symbolic-links=0 # Settings user and group are ignored when systemd is used. # If you need to run mysqld under a different user or group, # customize your systemd unit file for mariadb according to the # instructions in http://fedoraproject.org/wiki/Systemd server-id=2 relay_log = mysql-relay-bin log_bin =mysql-bin log_slave_updates =1 auto_increment_increment=2 auto_increment_offset=2 character-set-server=utf8 lower_case_table_names=1 [mysqld_safe] log-error=/var/log/mariadb/mariadb.log pid-file=/var/run/mariadb/mariadb.pid</description>
     </item>
     
     <item>
@@ -664,71 +89,7 @@ pid-file=/var/run/mariadb/mariadb.pid
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/kubernetes/install_minikube_on_hyper-v.html</guid>
-      
-        <description>
-
-&lt;blockquote&gt;
-&lt;p&gt;本文参考网址：&lt;a href=&#34;https://yq.aliyun.com/articles/221687&#34;&gt;https://yq.aliyun.com/articles/221687&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&#34;1-打开powershell安装hyper-v的所有组件&#34;&gt;1. 打开powershell安装hyper-v的所有组件&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;2-打开hyper-v管理控制台-新建一个外部的网络-映射到一个物理网卡-虚拟交换机的名称-这里使用-bridge&#34;&gt;2.打开hyper-v管理控制台，新建一个外部的网络，映射到一个物理网卡，虚拟交换机的名称，这里使用&lt;code&gt;Bridge&lt;/code&gt;&lt;/h3&gt;
-
-&lt;h3 id=&#34;3-下载-minikube-windows-amd64-exe-文件-并重命名为-minikube-exe&#34;&gt;3.下载 minikube-windows-amd64.exe 文件，并重命名为 &lt;code&gt;minikube.exe&lt;/code&gt;&lt;/h3&gt;
-
-&lt;p&gt;下载地址&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;https://github.com/kubernetes/minikube/releases
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;4-执行创建hyper-v&#34;&gt;4.执行创建hyper-v&lt;/h3&gt;
-
-&lt;p&gt;以管理员身份打开powershell过后执行下面的命令&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; minikube.exe start --image-mirror-country cn --iso-url=https://kubernetes.oss-cn-hangzhou.aliyuncs.com/minikube/iso/minikube-v1.6.0.iso    --registry-mirror=https://ho0aa4tw.mirror.aliyuncs.com     --vm-driver=&amp;quot;hyperv&amp;quot;    --hyperv-virtual-switch=&amp;quot;Bridge&amp;quot;     --memory=4096 --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;上面这个minikube的最新版本是我写这个文档 时的最新版本，如果要更新的，需要去下载&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;上面这个文档里面，是创建一个虚拟机，使用上面的镜像的信息安装一台k8s&lt;/p&gt;
-
-&lt;p&gt;安装的过程可能会有文件下载不下来的情况，需要重新下载，已经下载完成的不要删除，再次下载的时候，已经下载的不会再下载，但虚拟机要删除历史文件，删除此文件夹&lt;code&gt;C:\Users\runto.lv\.minikube&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;下载文件的保存路径在下面&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;C:\Users\runto.lv\.minikube\cache\images\registry.cn-hangzhou.aliyuncs.com\google_containers
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下载kubuctl&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;https://storage.googleapis.com/kubernetes-release/release/v1.17.0/bin/windows/amd64/kubectl.exe
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;配置环境变量，不然minicube dashboard这个命令不能运行,过程省略&lt;/p&gt;
-
-&lt;h3 id=&#34;5-本机文件复制复制到虚拟机&#34;&gt;5.本机文件复制复制到虚拟机&lt;/h3&gt;
-
-&lt;p&gt;先在hyper-v里面这台虚拟机的网卡上面，开启来宾服务，然后就可以把文件复制到虚拟机里面&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Copy-VMFile -Name minikube -SourcePath &#39;C:\Users\runto.lv\.minikube\cache\v1.17.2\kubeadm&#39; -DestinationPath &#39;/bin&#39; -FileSource Host
-
-Copy-VMFile -Name minikube -SourcePath &#39;C:\Users\runto.lv\.minikube\cache\v1.17.2\kubelet&#39; -DestinationPath &#39;/bin&#39; -FileSource Host
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;给执行权限&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubelet&amp;quot;
-
-minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubeadm&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>本文参考网址：https://yq.aliyun.com/articles/221687 1. 打开powershell安装hyper-v的所有组</description>
     </item>
     
     <item>
@@ -737,63 +98,7 @@ minikube -p minikube ssh &amp;quot;sudo chmod 755 /bin/kubeadm&amp;quot;
       <pubDate>Tue, 01 Oct 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/aliyun/aliyun_ddns_api.html</guid>
-      
-        <description>
-
-&lt;h1 id=&#34;阿里云dns动态解析&#34;&gt;阿里云DNS动态解析&lt;/h1&gt;
-
-&lt;p&gt;支持多解析记录&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/runto-lv/aliyunddns.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;如果提示版本太低使用下面的命令更新&lt;code&gt;pip install -U pip&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&#34;安装-python-sdk-pyaml&#34;&gt;安装 python sdk, pyaml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;pip install aliyun-python-sdk-alidns pyaml -i https://mirrors.aliyun.com/pypi/simple
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;修改配置文件-setting-yaml&#34;&gt;修改配置文件 setting.yaml&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;cp setting.yaml.sample setting.yaml
-vi setting.yaml
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code class=&#34;language-yaml&#34;&gt;# 阿里云 Access Key ID
-access_key_id: &amp;quot;XXX&amp;quot;
-
-# 阿里云 Access Key Secret
-access_key_secret: &amp;quot;XXXXXX&amp;quot;
-
-# 阿里云 一级域名
-rc_domain: &#39;github.com&#39;
-
-# 解析记录
-rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;access-key&#34;&gt;Access Key&lt;/h2&gt;
-
-&lt;p&gt;通过&lt;a href=&#34;https://ak-console.aliyun.com/#/accesskey&#34;&gt;阿里云Access Key管理&lt;/a&gt;, 获取access_key_id，access_key_secret。&lt;/p&gt;
-
-&lt;h2 id=&#34;添加域名解析记录&#34;&gt;添加域名解析记录&lt;/h2&gt;
-
-&lt;p&gt;修改好你使用的一级域名，通过&lt;a href=&#34;https://netcn.console.aliyun.com/core/domain/list&#34;&gt;阿里云域名管理&lt;/a&gt;，添加A记录，对一级域名的解析使用记录值为‘*’，A记录可以为你的二级域名，如 www.github.com, *.git.github.com。记录值随便写 8.8.8.8，因为后面会根据实际的IP进行动态更改。&lt;/p&gt;
-
-&lt;h2 id=&#34;crontab-定时运行&#34;&gt;crontab 定时运行&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;crontab -e
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;# Run at every 10th minute
-# */10 * * * * /usr/bin/python /path_to/aliyun_ddns.py &amp;gt;&amp;gt; /path_to/run.log 2&amp;gt;&amp;amp;1
-* * * * * /usr/bin/python /shell/aliyunddns/aliyun_ddns.py /dev/null 1&amp;gt;/dev/null
-&lt;/code&gt;&lt;/pre&gt;
-</description>
-      
+      <description>阿里云DNS动态解析 支持多解析记录 git clone https://github.com/runto-lv/aliyunddns.git 如果提示版本太低使用下面的命令更新pip install -U pip 安装 python sdk, pyaml pip install aliyun-python-sdk-alidns pyaml -i https://mirrors.aliyun.com/pypi/simple 修改配置文件 setting.yaml cp setting.yaml.sample setting.yaml vi setting.yaml # 阿里云</description>
     </item>
     
     <item>
@@ -802,26 +107,7 @@ rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
       <pubDate>Sat, 04 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/synology/synology_docker_gitlab.html</guid>
-      
-        <description>&lt;p&gt;在群晖NAS上面可以通过下面的命令快速创建一个gitlab&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt; docker run -d  \
- -p 8443:443 \
- -p 8080:80 \
- -p 222:22 \
- --name gitlab \
- --restart always \
- -v /volume1/docker/Gitlab/config:/etc/gitlab \
- -v /volume1/docker/Gitlab/logs:/var/log/gitlab \
- -v /volume1/docker/Gitlab/data:/var/opt/gitlab \
- gitlab/gitlab-ce
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;打开登陆界面 ，会要求修改密码，&lt;/p&gt;
-
-&lt;p&gt;修改密码过后就可以登陆了，用户名为root,密码为修改过的密码&lt;/p&gt;
-</description>
-      
+      <description>在群晖NAS上面可以通过下面的命令快速创建一个gitlab docker run -d \ -p 8443:443 \ -p 8080:80 \ -p 222:22 \ --name gitlab \ --restart always \ -v /volume1/docker/Gitlab/config:/etc/gitlab \ -v /volume1/docker/Gitlab/logs:/var/log/gitlab \ -v /volume1/docker/Gitlab/data:/var/opt/gitlab \ gitlab/gitlab-ce 打开登陆界面 ，会要求修改</description>
     </item>
     
     <item>
@@ -830,39 +116,7 @@ rc_rr_list: [&#39;www&#39;,&#39;*.git&#39;]
       <pubDate>Wed, 01 May 2019 00:00:00 +0000</pubDate>
       
       <guid>https://www.runto.lv/post/openvpn/openvpn_ldap_otp.html</guid>
-      
-        <description>&lt;p&gt;只需要修改下面几个参数即可&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;OVPN_SERVER_CN&lt;/code&gt;是外部的地址,比如公司对外开放的公网IP或是域名&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LDAP_URI&lt;/code&gt;是写AD服务器的地址&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LDAP_BASE_DN&lt;/code&gt;是自己的搜索用户的范围&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;LDAP_BIND_USER_DN&lt;/code&gt;这个是一个普通用户的Base dn路径,可以在域控用户属性编辑器中查到,这个普通 用户就可以了,不要使用管理员&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;LDAP_BIND_USER_PASS&lt;/code&gt;上面用户的密码&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;docker run \
---name openvpn \
---volume /home/openvpn:/etc/openvpn \
--v /etc/localtime:/etc/localtime:ro \
---detach=true \
---restart=always  \
--p 1194:1194/udp \
--e &amp;quot;OVPN_PROTOCOL=udp&amp;quot; \
--e &amp;quot;OVPN_SERVER_CN=vpn.runto.lv&amp;quot; \
--e &amp;quot;LDAP_URI=ldap://10.0.10.20&amp;quot; \
--e &amp;quot;LDAP_BASE_DN=dc=runto,dc=lv&amp;quot; \
--e &amp;quot;LDAP_BIND_USER_DN=cn=ad,cn=Users,dc=runto,dc=lv&amp;quot; \
--e &amp;quot;LDAP_BIND_USER_PASS=P@ssw0rd&amp;quot; \
--e &amp;quot;ACTIVE_DIRECTORY_COMPAT_MODE=true&amp;quot; \
--e &amp;quot;ENABLE_OTP=true&amp;quot; \
--e &amp;quot;DEBUG=true&amp;quot; \
---cap-add=NET_ADMIN \
-wheelybird/openvpn-ldap-otp
-&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-      
+      <description>只需要修改下面几个参数即可 OVPN_SERVER_CN是外部的地址,比如公司对外开放的公网IP或是域名 LDAP_URI是写AD服务器的地址 L</description>
     </item>
     
   </channel>
