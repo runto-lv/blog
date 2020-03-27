@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="zh-cn">
 
-<head><title>database · Runto的IT技术博客的博客</title><meta name="baidu-site-verification" content="jZRrwlvEpq" />
+<head><title>dataguard · Runto的IT技术博客的博客</title><meta name="baidu-site-verification" content="jZRrwlvEpq" />
 <meta name="google-site-verification" content="OcQLxKrUrj5A9hpAdCQuoY-K7f5Ja4LUYt35Kxdwq_E" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <meta name="description" content="Runto的IT技术博客的博客" />
@@ -109,7 +109,7 @@
                 <div class="post-heading">
                     
                     <div class="archive-title tag">
-                        <h2 class="archive-name">标签： database</h2>
+                        <h2 class="archive-name">标签： dataguard</h2>
                     </div>
                     
                     <span class="meta">@Runto的IT技术博客 &nbsp;2020-03-26</span>
@@ -151,66 +151,6 @@
         <h1 class="post-index-title"><a target="_blank" itemtype="url" href="https://www.runto.lv/post/database/dataguard_standby_rebuild.html">ORACLE DATAGUARD重建备库</a></h1>
         <div class="post-content-preview">
             重建步骤 1、删除备库所有的数据文件、日志文件、控制文件 /u01/app/oracle/oradata/orcl rm -rf * 进入闪回区，删除control02.ctl cd /u01/app/oracle/flash_recovery_area rm -rf control02.ctl 2、备份备库的参数文件和密
-        </div>
-        <div class="clearfix topic-footer">
-            <span class="pull-left time mobile_time">July 12,2019</span>
-        </div>
-    </div>
-</article>
-    
-    <article class="am-g blog-entry-article">
-    <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
-        <div class="topic-header">
-            <div class="pull-left">
-                <div class="blog-flex-center">
-                    <div class="blog-flex0">
-                        <img src="/img/logo.png" alt="" class="link avatar avatar-image">
-                    </div>
-                    <div class="author-lockup blog-flex1">
-                        <a class="link" href="/post/database/oracle_dataguard_standby.html">Runto的IT技术博客</a>
-                        <span class="in">in</span>
-                        <span class="category-name">
-                               <a href="https://www.runto.lv/categories/database.html"> Database </a>
-                                  
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <span class="pull-right time pc_time">2020-03-21</span>
-        </div>
-        <h1 class="post-index-title"><a target="_blank" itemtype="url" href="https://www.runto.lv/post/database/oracle_dataguard_standby.html">DataGuard standby数据库的日常维护</a></h1>
-        <div class="post-content-preview">
-            参考网址： https://www.cnblogs.com/wlmq/articles/6069477.html 1.停止Standby # 查看备库是否在应用日志进行恢复 select process, status from v$managed_standby; alter database recover managed standby database cancel; shutdown immediate; 2.切换到只读模式 2.1由shutdown模式
-        </div>
-        <div class="clearfix topic-footer">
-            <span class="pull-left time mobile_time">July 12,2019</span>
-        </div>
-    </div>
-</article>
-    
-    <article class="am-g blog-entry-article">
-    <div class="am-u-lg-6 am-u-lg-12 am-u-sm-12 blog-entry-text post-preview">
-        <div class="topic-header">
-            <div class="pull-left">
-                <div class="blog-flex-center">
-                    <div class="blog-flex0">
-                        <img src="/img/logo.png" alt="" class="link avatar avatar-image">
-                    </div>
-                    <div class="author-lockup blog-flex1">
-                        <a class="link" href="/post/database/mysql_conf.html">Runto的IT技术博客</a>
-                        <span class="in">in</span>
-                        <span class="category-name">
-                               <a href="https://www.runto.lv/categories/database.html"> Database </a>
-                                  
-                            </span>
-                    </div>
-                </div>
-            </div>
-            <span class="pull-right time pc_time">2019-10-16</span>
-        </div>
-        <h1 class="post-index-title"><a target="_blank" itemtype="url" href="https://www.runto.lv/post/database/mysql_conf.html">mysql双主模式两台Server配置文件</a></h1>
-        <div class="post-content-preview">
-            mysql master [mysqld] datadir=/var/lib/mysql socket=/var/lib/mysql/mysql.sock # Disabling symbolic-links is recommended to prevent assorted security risks symbolic-links=0 # Settings user and group are ignored when systemd is used. # If you need to run mysqld under a different user or group, # customize your systemd unit file for mariadb according to the # instructions in http://fedoraproject.org/wiki/Systemd server-id=2 relay_log = mysql-relay-bin log_bin =mysql-bin log_slave_updates =1 auto_increment_increment=2 auto_increment_offset=2 character-set-server=utf8 lower_case_table_names=1 [mysqld_safe] log-error=/var/log/mariadb/mariadb.log pid-file=/var/run/mariadb/mariadb.pid
         </div>
         <div class="clearfix topic-footer">
             <span class="pull-left time mobile_time">July 12,2019</span>

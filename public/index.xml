@@ -96,8 +96,8 @@ log file=/var/log/rsyncd.log                #指定日志路径
 timeout=600                                 #连接超时时间
 port=873                                    #指定tcp端口
 
-[backup]
-path = /home/rsync
+[eas]
+path = /kingdee
 # hosts you allow to access
 hosts allow = 10.0.2.68
 hosts deny = *
@@ -114,14 +114,14 @@ chkconfig rsync on
 
 &lt;h3 id=&#34;2-在源服务器上执行如下操作&#34;&gt;2.在源服务器上执行如下操作&lt;/h3&gt;
 
-&lt;p&gt;下面这个操作,是把本地/home/rsync文件夹同步到备服务器的,但这个未启用&lt;code&gt;强一致性&lt;/code&gt;,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除&lt;/p&gt;
+&lt;p&gt;下面这个操作,是把本地/kingdee文件夹同步到备服务器的,但这个未启用&lt;code&gt;强一致性&lt;/code&gt;,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;rsync -avz  /home/rsync/ 10.0.2.25::backup
+&lt;pre&gt;&lt;code&gt;rsync -avz  /kingdee/ 10.0.2.25::eas
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;所以应使用下面这个命令,这个是两个目录 完全保持一致,源删除,目标也删除&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+&lt;pre&gt;&lt;code&gt;rsync -avz --delete /kingdee/ 10.0.2.25::eas
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;h3 id=&#34;3-设置定时任务&#34;&gt;3.设置定时任务&lt;/h3&gt;
@@ -131,7 +131,106 @@ chkconfig rsync on
 
 &lt;p&gt;加入下面的内容&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;00 4 * * * root        rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+&lt;pre&gt;&lt;code&gt;00 4 * * * root        rsync -avz --delete /kingdee/ 10.0.2.25::eas
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+      
+    </item>
+    
+    <item>
+      <title>ORACLE DATAGUARD重建备库</title>
+      <link>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</guid>
+      
+        <description>
+
+&lt;h1 id=&#34;重建步骤&#34;&gt;重建步骤&lt;/h1&gt;
+
+&lt;h2 id=&#34;1-删除备库所有的数据文件-日志文件-控制文件&#34;&gt;1、删除备库所有的数据文件、日志文件、控制文件&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;/u01/app/oracle/oradata/orcl
+rm -rf *
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;进入闪回区，删除control02.ctl&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /u01/app/oracle/flash_recovery_area
+rm -rf control02.ctl
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;2-备份备库的参数文件和密码文件&#34;&gt;2、备份备库的参数文件和密码文件&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;cd $ORACLE_HOME/dbs
+mv spfileorcl.ora spfileorcl.ora.bak
+cp orapworcl orapworcl.bak
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;3-进入主库连接辅库&#34;&gt;3、进入主库连接辅库&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;SQL&amp;gt; create spfile from pfile=&#39;/tmp/initorcl.ora&#39;;
+SQL&amp;gt; startup nomount;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;$ rman target sys/yH.20200316@orcldg auxiliary sys/yH.20200316@orclpr
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;4-复制主库数据文件-日志文件-控制文件-密码文件-参数文件到备库&#34;&gt;4、复制主库数据文件、日志文件、控制文件、密码文件、参数文件到备库&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;RMAN&amp;gt; duplicate target database for standby from active database nofilenamecheck;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;5-打开备库&#34;&gt;5、打开备库&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database open read only;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;6-应用日志&#34;&gt;6、应用日志&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;alter database recover managed standby database using current logfile disconnect from session;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;7-检查日志应用状态&#34;&gt;7、检查日志应用状态&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;select sequence#,applied from v$archived_log;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;8-分别查看主库和备库的归档序列号是否一致&#34;&gt;8、分别查看主库和备库的归档序列号是否一致：&lt;/h2&gt;
+
+&lt;p&gt;主库上面执行&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SQL&amp;gt; alter system switch logfile;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后再主备上面都执行下面这行命令&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;archive log list;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行结果:&lt;/p&gt;
+
+&lt;p&gt;主:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SQL&amp;gt; archive log list;
+Database log mode	       Archive Mode
+Automatic archival	       Enabled
+Archive destination	       /u01/app/oracle/oradata/orcl/archivelog
+Oldest online log sequence     17
+Next log sequence to archive   19
+Current log sequence	       19
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;备:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SQL&amp;gt; archive log list;
+Database log mode	       Archive Mode
+Automatic archival	       Enabled
+Archive destination	       /u01/app/oracle/oradata/orcl/archivelog
+Oldest online log sequence     17
+Next log sequence to archive   0
+Current log sequence	       19
+SQL&amp;gt; 
 &lt;/code&gt;&lt;/pre&gt;
 </description>
       

@@ -173,8 +173,8 @@ log file=/var/log/rsyncd.log                #指定日志路径
 timeout=600                                 #连接超时时间
 port=873                                    #指定tcp端口
 
-[backup]
-path = /home/rsync
+[eas]
+path = /kingdee
 # hosts you allow to access
 hosts allow = 10.0.2.68
 hosts deny = *
@@ -191,14 +191,14 @@ chkconfig rsync on
 
 <h3 id="2-在源服务器上执行如下操作">2.在源服务器上执行如下操作</h3>
 
-<p>下面这个操作,是把本地/home/rsync文件夹同步到备服务器的,但这个未启用<code>强一致性</code>,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除</p>
+<p>下面这个操作,是把本地/kingdee文件夹同步到备服务器的,但这个未启用<code>强一致性</code>,假如在源服务器上面文件已经删除,但备服务器上面的文件不会删除</p>
 
-<pre><code>rsync -avz  /home/rsync/ 10.0.2.25::backup
+<pre><code>rsync -avz  /kingdee/ 10.0.2.25::eas
 </code></pre>
 
 <p>所以应使用下面这个命令,这个是两个目录 完全保持一致,源删除,目标也删除</p>
 
-<pre><code>rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+<pre><code>rsync -avz --delete /kingdee/ 10.0.2.25::eas
 </code></pre>
 
 <h3 id="3-设置定时任务">3.设置定时任务</h3>
@@ -208,7 +208,7 @@ chkconfig rsync on
 
 <p>加入下面的内容</p>
 
-<pre><code>00 4 * * * root        rsync -avz --delete /home/rsync/ 10.0.2.25::backup
+<pre><code>00 4 * * * root        rsync -avz --delete /kingdee/ 10.0.2.25::eas
 </code></pre>
 
                 </div>

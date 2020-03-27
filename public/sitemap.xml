@@ -66,27 +66,41 @@
   
   <url>
     <loc>https://www.runto.lv/categories/database.html</loc>
-    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.runto.lv/tags/database.html</loc>
-    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.runto.lv/post/database/oracle_dataguard_standby.html</loc>
-    <lastmod>2020-03-21T00:00:00+00:00</lastmod>
+    <loc>https://www.runto.lv/tags/dataguard.html</loc>
+    <lastmod>2020-03-26T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://www.runto.lv/tags/oracle.html</loc>
+    <lastmod>2020-03-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</loc>
+    <lastmod>2020-03-26T00:00:00+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.runto.lv/post/database/oracle_dataguard_standby.html</loc>
     <lastmod>2020-03-21T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -177,14 +191,14 @@
   </url>
   
   <url>
-    <loc>https://www.runto.lv/categories/aliyun.html</loc>
+    <loc>https://www.runto.lv/tags/aliyun.html</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.runto.lv/tags/aliyun.html</loc>
+    <loc>https://www.runto.lv/categories/aliyun.html</loc>
     <lastmod>2019-10-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
@@ -310,14 +324,14 @@
   </url>
   
   <url>
-    <loc>https://www.runto.lv/tags/openvpn.html</loc>
+    <loc>https://www.runto.lv/categories/openvpn.html</loc>
     <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://www.runto.lv/categories/openvpn.html</loc>
+    <loc>https://www.runto.lv/tags/openvpn.html</loc>
     <lastmod>2019-05-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>

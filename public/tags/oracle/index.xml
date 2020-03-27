@@ -6,10 +6,19 @@
     <description>Recent content in oracle on Runto的IT技术博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sat, 21 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 26 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://www.runto.lv/tags/oracle/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>ORACLE DATAGUARD重建备库</title>
+      <link>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</link>
+      <pubDate>Thu, 26 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://www.runto.lv/post/database/dataguard_standby_rebuild.html</guid>
+      <description>重建步骤 1、删除备库所有的数据文件、日志文件、控制文件 /u01/app/oracle/oradata/orcl rm -rf * 进入闪回区，删除control02.ctl cd /u01/app/oracle/flash_recovery_area rm -rf control02.ctl 2、备份备库的参数文件和密</description>
+    </item>
     
     <item>
       <title>DataGuard standby数据库的日常维护</title>
